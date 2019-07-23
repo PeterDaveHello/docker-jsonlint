@@ -1,0 +1,41 @@
+---
+
+dist: bionic
+
+services:
+  - docker
+
+stages:
+  - Static test
+  - Build test
+
+jobs:
+  include:
+    - stage: Static test
+      env:
+        - Test: hadolint
+      language: minimal
+      script:
+        - docker run --rm -i hadolint/hadolint < Dockerfile
+
+    - stage: Static test
+      env:
+        - Test: dockerfile_lint
+      language: node_js
+      node_js:
+        - "8"
+      script:
+        - npx --cache .npx dockerfile_lint
+      cache:
+        directories:
+          - .npx
+
+    - stage: Build test
+      language: minimal
+      before_script:
+        - LATEST_JSONLINT="$(curl https://registry.npmjs.org/jsonlint -so- | jq -r '.["dist-tags"].latest')"
+        - export LATEST_JSONLINT
+      script:
+        - docker build --build-arg JSONLINT_VERSION="$LATEST_JSONLINT" -t docker-jsonlint:$TRAVIS_COMMIT .
+      after_success:
+        - docker run --rm docker-jsonlint:$TRAVIS_COMMIT jsonlint --help

@@ -13,3 +13,5 @@ WORKDIR /json
 RUN npm install -g jsonlint@"$JSONLINT_VERSION" && \
 	rm -rf ~/.npm && \
 	jsonlint --help
+
+USER node

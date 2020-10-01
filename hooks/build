@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "latest" = "$DOCKER_TAG" ]; then
+if [ "latest" = "$DOCKER_TAG" ] && [ "master" = "$SOURCE_BRANCH" ]; then
     JSONLINT_VERSION=$(curl https://registry.npmjs.org/jsonlint -sLo- | grep -Po '"latest":"\d+\.\d+\.\d+"' | awk -F'"' '{print $4}')
 else
     JSONLINT_VERSION="$SOURCE_BRANCH"

@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.com/PeterDaveHello/docker-jsonlint.svg?branch=master)](https://travis-ci.com/PeterDaveHello/docker-jsonlint)
 [![Docker Hub pulls](https://img.shields.io/docker/pulls/peterdavehello/jsonlint.svg)](https://hub.docker.com/r/peterdavehello/jsonlint/)
-[![Docker image layers](https://images.microbadger.com/badges/image/peterdavehello/jsonlint.svg)](https://microbadger.com/images/peterdavehello/jsonlint/)
-[![Docker image version](https://images.microbadger.com/badges/version/peterdavehello/jsonlint.svg)](https://hub.docker.com/r/peterdavehello/jsonlint/tags/)
 
 [![Docker Hub badge](http://dockeri.co/image/peterdavehello/jsonlint)](https://hub.docker.com/r/peterdavehello/jsonlint/)
 

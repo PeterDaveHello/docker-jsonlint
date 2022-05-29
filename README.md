@@ -1,6 +1,6 @@
 # docker-jsonlint
 
-[![Build Status](https://travis-ci.com/PeterDaveHello/docker-jsonlint.svg?branch=master)](https://travis-ci.com/PeterDaveHello/docker-jsonlint)
+[![Build Status](https://app.travis-ci.com/PeterDaveHello/docker-jsonlint.svg?branch=master)](https://app.travis-ci.com/PeterDaveHello/docker-jsonlint)
 [![Docker Hub pulls](https://img.shields.io/docker/pulls/peterdavehello/jsonlint.svg)](https://hub.docker.com/r/peterdavehello/jsonlint/)
 
 [![Docker Hub badge](http://dockeri.co/image/peterdavehello/jsonlint)](https://hub.docker.com/r/peterdavehello/jsonlint/)

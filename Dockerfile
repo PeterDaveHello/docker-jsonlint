@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 ARG JSONLINT_VERSION
 ENV npm_config_loglevel=silent

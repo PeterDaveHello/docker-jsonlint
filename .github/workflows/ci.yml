@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  hadolint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+  dockerfile-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run dockerfile_lint
+        run: npx dockerfile_lint
+
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get latest jsonlint version
+        id: jsonlint-version
+        run: |
+          if ! LATEST_JSONLINT=$(curl -fsSL https://registry.npmjs.org/jsonlint | jq -r '.["dist-tags"].latest'); then
+            echo "Failed to fetch jsonlint version" >&2
+            exit 1
+          fi
+          echo "LATEST_JSONLINT=${LATEST_JSONLINT}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: docker build --build-arg JSONLINT_VERSION="$LATEST_JSONLINT" -t docker-jsonlint:${{ github.sha }} .
+
+      - name: Test Docker image
+        run: docker run --rm docker-jsonlint:${{ github.sha }} jsonlint --help 
